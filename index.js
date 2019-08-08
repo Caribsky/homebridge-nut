@@ -261,9 +261,7 @@ NutAccessory.prototype = {
 			.setCharacteristic(Characteristic.Name, this.name)
 			.setCharacteristic(Characteristic.SerialNumber, this.accVars["ups.serial"] || 'No Serial#')
 			.setCharacteristic(Characteristic.FirmwareRevision, this.accVars["ups.firmware"] || 'No Data')
-			.setCharacteristic(Characteristic.Model, this.accVars["device.model"].trim() || this.accVars["ups.productid"] || 'No Model#');
-    services.push(serviceInfo);
-
+			.setCharacteristic(Characteristic.Model, this.accVars["device.model"] === undefined ? false : this.accVars["device.model"].trim() || this.accVars["ups.productid"] || 'No Model#');
 		this.serviceBatt = new Service.BatteryService();
 		this.serviceBatt.setCharacteristic(Characteristic.BatteryLevel, this.accVars["battery.charge"])
 			.setCharacteristic(Characteristic.Name, this.name)
